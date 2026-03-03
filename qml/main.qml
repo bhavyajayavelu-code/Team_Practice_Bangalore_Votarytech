@@ -29,9 +29,6 @@ Window {
         property bool tempBlinking: false
         property int blinkElapsed: 0
 
-        property int tempCrossCount: 0
-        property string tempServiceMessage: ""
-
 
         // -------- ODOMETER --------
         property int odometer: 100        // start value
@@ -81,6 +78,16 @@ Window {
         property string airbagStatus: ""
 
 
+       property string firebaseAlertMessage: ""
+
+
+        // ===== DTC =====
+        property string dtcDescription: ""
+        property bool dtcActive: false
+        // ===== ULTRASONIC =====
+        property bool ultrasonicFCW: false
+        property real ultrasonicDistance: 0
+        property string ultrasonicAlert: ""
 
     Rectangle {
         id: logoSplash
@@ -137,15 +144,15 @@ Window {
         color: "transparent"
 
 
-        // Engine icon (replacing ABS)
-        Image {
-            source: "qrc:/assets/icons/engine.png"
-            width: 36
-            height: 36
-            anchors.right: parent.right
-            anchors.rightMargin: 20
-            anchors.verticalCenter: parent.verticalCenter
-        }
+//        // Engine icon (replacing ABS)
+//        Image {
+//            source: "qrc:/assets/icons/engine.png"
+//            width: 36
+//            height: 36
+//            anchors.right: parent.right
+//            anchors.rightMargin: 20
+//            anchors.verticalCenter: parent.verticalCenter
+//        }
         // =========================
         // Time & Date (Center of Top Bar)
         // =========================
@@ -430,7 +437,7 @@ Window {
         }
 
     // =========================
-    // Battery Temperature (BOTTOM)
+    // Battery Temperature
     // =========================
     Text {
         id: batteryTempText
@@ -444,70 +451,104 @@ Window {
         anchors.topMargin: 12
     }
 
+
+    // =========================
+    // Firebase Alert Message
+    // =========================
     Text {
-        id: serviceTempText
-        text: tempServiceMessage
+        id: firebaseAlertText
+        text: firebaseAlertMessage
         color: "red"
-        font.pixelSize: 16
+        font.pixelSize: 18
         font.bold: true
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: batteryTempText.bottom
-        anchors.topMargin: 10
-        visible: tempServiceMessage !== ""
+        anchors.topMargin: 8
+
+        visible: firebaseAlertMessage !== ""
     }
 
 
+    // =========================
+    // DTC DISPLAY
+    // =========================
     Text {
-        text: batteryAlertMessage
+        id: dtcText
+        text: dtcDescription
         color: "red"
         font.pixelSize: 16
         font.bold: true
-        //anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.leftMargin: 60   // adjust value as needed
 
-        anchors.top: serviceTempText.bottom
-        anchors.topMargin:-5
-        visible: batterySensorFault
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: firebaseAlertText.visible
+                     ? firebaseAlertText.bottom
+                     : batteryTempText.bottom
+        anchors.topMargin: 8
+
+        visible: dtcActive
     }
 
-    // ===== DMS ALERT TEXT =====
+
+
+
+    // =========================
+    // DMS ALERT TEXT
+    // =========================
     Text {
         id: dmsAlertText
         text: drowsyMsg ? drowsyText :
               yawnMsg ? yawnText : ""
 
         color: "red"
-        font.pixelSize: 16
+        font.pixelSize: 20
+        font.bold: true
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.horizontalCenterOffset: 380
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 60
+
+        visible: drowsyMsg || yawnMsg
+    }
+
+
+    // =========================
+    // OMS DISPLAY TEXT
+    // =========================
+    Text {
+        id: omsStatusText
+        text: seatStatus + "   |   Airbag: " + airbagStatus
+
+        color: airbagStatus === "ACTIVATED" ? "#00FF00" : "red"
+        font.pixelSize: 18
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.horizontalCenterOffset: 320
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 40
-
-        visible: drowsyMsg || yawnMsg
-    }
-
-    // ===== OMS DISPLAY TEXT =====
-    Text {
-        id: omsStatusText
-        text: seatStatus + "   |   Airbag: " + airbagStatus
-
-
-        color: airbagStatus === "ACTIVATED" ? "#00FF00" : "red"
-        font.pixelSize: 20
-        font.bold: true
-
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenterOffset: -360
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 70
+        anchors.bottomMargin: 60
 
         visible: seatStatus !== ""
     }
 
 
+    // =========================
+    // ULTRASONIC ALERT DISPLAY
+    // =========================
+    Text {
+        id: ultrasonicAlertText
+        text: ultrasonicAlert
+        color: "red"
+        font.pixelSize: 18
+        font.bold: true
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+
+        visible: ultrasonicAlert !== ""
+    }
 
 
     // =========================
@@ -623,6 +664,26 @@ Window {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     try {
                         var data = JSON.parse(xhr.responseText)
+                        // ===== ULTRASONIC DATA =====
+                        if (data.Ultrasonic) {
+
+                            ultrasonicFCW = data.Ultrasonic.FCW === true
+                            ultrasonicDistance = parseFloat(data.Ultrasonic.distance) || 0
+                            ultrasonicAlert = data.Ultrasonic.alert || ""
+
+                        } else {
+                            ultrasonicFCW = false
+                            ultrasonicDistance = 0
+                            ultrasonicAlert = ""
+                        }
+
+                        // ===== ALERT MESSAGE FROM FIREBASE =====
+                        if (data.Alerts && data.Alerts.message && data.Alerts.message !== "") {
+                            firebaseAlertMessage = data.Alerts.message
+                        } else {
+                            firebaseAlertMessage = ""
+                        }
+
 
                         if (data.car_indicators) {
 
@@ -672,12 +733,34 @@ Window {
                                 airbagStatus = ""
                             }
                         }
+                        // ===== DTC FROM FIREBASE (SHOW ONLY DESCRIPTION) =====
+                        dtcActive = false
+                        dtcDescription = ""
 
+                        if (data.DTC && typeof data.DTC === "object") {
 
+                            for (var code in data.DTC) {
 
+                                var dtcItem = data.DTC[code]
 
-                        if (data.sensor && data.sensor.temperature !== undefined) {
-                            firebaseTemperature = data.sensor.temperature
+                                // Show only when:
+                                // 1. status is true
+                                // 2. description exists
+                                // 3. description is not empty
+
+                                if (dtcItem.status === true &&
+                                    dtcItem.description &&
+                                    dtcItem.description.trim() !== "") {
+
+                                    dtcActive = true
+                                    dtcDescription = dtcItem.description   // ✅ ONLY DESCRIPTION
+                                    break   // show only first active DTC
+                                }
+                            }
+                        }
+
+                        if (data.Sensor && data.Sensor.temperature !== undefined) {
+                            firebaseTemperature = parseFloat(data.Sensor.temperature)
 
                             // -------- Battery sensor fault (-127) --------
                             if (firebaseTemperature === -127) {
@@ -692,24 +775,15 @@ Window {
                             // Check if temperature is above 28°C
                             if (firebaseTemperature > 28) {
 
-                                tempCrossCount++   // count how many times crossed
-
-                                if (!tempBlinking) {
-                                    tempBlinking = true
+                                tempBlinking = true
+                                if (!blinkTimer.running)
                                     blinkTimer.start()
-                                }
-
-                                if (tempCrossCount >= 3) {
-                                    tempServiceMessage = 'Service Required: Battery Temperature High'
-                                }
 
                             } else {
+
                                 tempBlinking = false
                                 blinkTimer.stop()
                                 tempWarningIcon.opacity = 1
-
-                                tempCrossCount = 0
-                                tempServiceMessage = ""
                             }
 
                         }
