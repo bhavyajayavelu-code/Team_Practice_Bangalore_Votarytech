@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1098432960582",
+    "firebase_url": "https://remote-operation-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "remote-operation",
+    "storage_bucket": "remote-operation.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098432960582:android:08559f55c809475a73d247",
+        "android_client_info": {
+          "package_name": "com.example.ind_remote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUUQ75rNgJyfgFjfvlkE224fjixXytK00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
