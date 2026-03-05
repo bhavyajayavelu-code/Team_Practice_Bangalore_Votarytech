@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleet Telemetry</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #0C1729 0%, #1A2C42 100%);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 8px;
+  background: rgba(26, 44, 66, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(63, 255, 216, 0.3);
+  position: relative;
+}
+
+.header h1 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #3FFFD8, #2196F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Top Row - SMALLER boxes */
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: 80px; /* Slightly taller for warning messages */
+}
+
+/* Temperature Card */
+.temp-card {
+  background: linear-gradient(145deg, rgba(255, 87, 34, 0.2), rgba(255, 87, 34, 0.1));
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.temp-value {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 2px 0;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.temp-label {
+  font-size: 9px;
+  color: #CCCCCC;
+  letter-spacing: 0.3px;
+}
+
+/* Temperature Warning Message */
+.temp-warning {
+  font-size: 8px;
+  color: #F44336;
+  margin-top: 2px;
+  font-weight: bold;
+  animation: blink 1s infinite;
+  min-height: 12px;
+}
+
+/* Motion Card */
+.motion-card {
+  background: linear-gradient(145deg, rgba(63, 255, 216, 0.2), rgba(63, 255, 216, 0.1));
+  border: 1px solid rgba(63, 255, 216, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.direction-box {
+  font-size: 24px;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.motion-text {
+  font-size: 11px;
+  font-weight: bold;
+  color: #3FFFD8;
+  text-transform: uppercase;
+  margin: 1px 0;
+  line-height: 1;
+}
+
+.motion-label {
+  font-size: 9px;
+  color: #CCCCCC;
+  letter-spacing: 0.3px;
+}
+
+/* Charts Section - Stacked vertically */
+.charts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  margin: 4px 0;
+}
+
+/* Chart Cards */
+.chart-card {
+  background: rgba(26, 44, 66, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  position: relative;
+  min-height: 140px;
+}
+
+.chart-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.temp-chart::before {
+  background: linear-gradient(90deg, #2196F3, #F44336);
+}
+
+.motion-chart::before {
+  background: linear-gradient(90deg, #2196F3, #3FFFD8);
+}
+
+.driver-chart::before {
+  background: linear-gradient(90deg, #FF9800, #F44336, #9C27B0);
+}
+
+.chart-title {
+  font-size: 10px;
+  color: #64B5F6;
+  margin-bottom: 6px;
+  font-weight: bold;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Driver Warning Message */
+.driver-warning {
+  font-size: 8px;
+  color: #FF9800;
+  margin-bottom: 4px;
+  font-weight: bold;
+  min-height: 12px;
+  animation: pulse 2s infinite;
+}
+
+/* Chart Container */
+.chart-container {
+  height: calc(100% - 30px);
+  position: relative;
+}
+
+/* Scrollbar */
+.charts-section::-webkit-scrollbar {
+  width: 3px;
+}
+
+.charts-section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.charts-section::-webkit-scrollbar-thumb {
+  background: rgba(63, 255, 216, 0.3);
+  border-radius: 2px;
+}
+
+/* Connection Status */
+.connection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: rgba(26, 44, 66, 0.9);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 30px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: #4CAF50;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.status-text {
+  font-size: 9px;
+  color: #90CAF9;
+}
+
+/* Animation */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.value-update {
+  animation: valueUpdate 0.3s ease;
+}
+
+@keyframes valueUpdate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+  <!-- Header -->
+  <div class="header">
+    <h1>🚗 FLEET TELEMETRY</h1>
+  </div>
+
+  <!-- Top Row - Temperature & Motion with Warnings -->
+  <div class="top-row">
+    <!-- Temperature Card with Warning -->
+    <div class="temp-card">
+      <div class="temp-value" id="tempValue">--°C</div>
+      <div class="temp-label">AC TEMPERATURE</div>
+      <div class="temp-warning" id="tempWarning"></div>
+    </div>
+
+    <!-- Motion Card -->
+    <div class="motion-card">
+      <div class="direction-box" id="direction">⬜</div>
+      <div class="motion-text" id="motionValue">--</div>
+      <div class="motion-label">VEHICLE MOTION</div>
+    </div>
+  </div>
+
+  <!-- Charts Section - Stacked -->
+  <div class="charts-section">
+    <!-- Temperature Trend Chart -->
+    <div class="chart-card temp-chart">
+      <div class="chart-title">TEMPERATURE TREND</div>
+      <div class="chart-container">
+        <canvas id="tempChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Vehicle Motion Trend Chart -->
+    <div class="chart-card motion-chart">
+      <div class="chart-title">MOTION TREND</div>
+      <div class="chart-container">
+        <canvas id="motionChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Driver Behavior Chart with Warning -->
+    <div class="chart-card driver-chart">
+      <div class="chart-title">DRIVER BEHAVIOR</div>
+      <div class="driver-warning" id="driverWarning"></div>
+      <div class="chart-container">
+        <canvas id="driverChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection Status -->
+  <div class="connection" id="connection">
+    <div class="dot" id="statusDot"></div>
+    <span class="status-text" id="statusText">CONNECTED TO FIREBASE</span>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+/* Firebase Config */
+const firebaseConfig = {
+  apiKey: "AIzaSyCR_FwvqqMGctW9i6MNn4ZUAGcuIjxPAqQ",
+  authDomain: "edge-data-filtering.firebaseapp.com",
+  databaseURL: "https://edge-data-filtering-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "edge-data-filtering"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* DOM Elements */
+const tempValue = document.getElementById("tempValue");
+const tempWarning = document.getElementById("tempWarning");
+const motionValue = document.getElementById("motionValue");
+const direction = document.getElementById("direction");
+const driverWarning = document.getElementById("driverWarning");
+const statusText = document.getElementById("statusText");
+const statusDot = document.getElementById("statusDot");
+
+let lastUpdateTime = Date.now();
+let accelCount = 0, brakeCount = 0, cornerCount = 0;
+
+/* ================= Charts Configuration ================= */
+
+// Temperature Chart
+const tempChart = new Chart(
+  document.getElementById("tempChart").getContext("2d"), {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [{
+        label: "Temperature (°C)",
+        data: [],
+        borderWidth: 2,
+        borderColor: "#2196F3",
+        backgroundColor: "rgba(33, 150, 243, 0.1)",
+        tension: 0.3,
+        fill: true,
+        pointBackgroundColor: "#2196F3",
+        pointBorderColor: "#FFFFFF",
+        pointBorderWidth: 1,
+        pointRadius: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          titleColor: "#FFFFFF",
+          bodyColor: "#FFFFFF",
+          titleFont: { size: 9 },
+          bodyFont: { size: 9 }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            maxRotation: 0,
+            font: { size: 7 }
+          }
+        },
+        y: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            font: { size: 7 }
+          }
+        }
+      }
+    }
+  }
+);
+
+// Motion Chart
+const motionChart = new Chart(
+  document.getElementById("motionChart").getContext("2d"), {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [{
+        label: "Tilt Position",
+        data: [],
+        borderWidth: 2,
+        borderColor: "#2196F3",
+        backgroundColor: "rgba(33, 150, 243, 0.1)",
+        tension: 0.3,
+        fill: true,
+        pointBackgroundColor: "#2196F3",
+        pointBorderColor: "#FFFFFF",
+        pointBorderWidth: 1,
+        pointRadius: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            maxRotation: 0,
+            font: { size: 7 }
+          }
+        },
+        y: {
+          min: -2,
+          max: 2,
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            font: { size: 7 },
+            callback: function(value) {
+              const map = { "-2": "BACK", "-1": "LEFT", "0": "FLAT", "1": "RIGHT", "2": "FRONT" };
+              return map[value] || "";
+            }
+          }
+        }
+      }
+    }
+  }
+);
+
+// Driver Behavior Chart
+const driverChart = new Chart(
+  document.getElementById("driverChart").getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: ["Harsh Accel", "Harsh Brake", "Aggressive"],
+      datasets: [{
+        label: "Count",
+        data: [0, 0, 0],
+        backgroundColor: ["#FF9800", "#F44336", "#9C27B0"],
+        borderWidth: 1,
+        borderColor: ["#FF9800", "#F44336", "#9C27B0"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            font: { size: 7 }
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { 
+            color: "#90CAF9",
+            font: { size: 7 },
+            stepSize: 1
+          }
+        }
+      }
+    }
+  }
+);
+
+/* ================= Tilt Mapping ================= */
+const tiltMap = {
+  "back": { icon: "⬇️", text: "BACK", value: -2 },
+  "left": { icon: "⬅️", text: "LEFT", value: -1 },
+  "flat": { icon: "✅", text: "FLAT", value: 0 },
+  "right": { icon: "➡️", text: "RIGHT", value: 1 },
+  "front": { icon: "⬆️", text: "FRONT", value: 2 }
+};
+
+/* ================= Update Driver Warning ================= */
+function updateDriverWarning() {
+  const totalEvents = accelCount + brakeCount + cornerCount;
+  
+  if (totalEvents === 0) {
+    driverWarning.textContent = "✓ No harsh events detected";
+    driverWarning.style.color = "#4CAF50";
+  } else if (totalEvents <= 3) {
+    driverWarning.textContent = "⚠️ Minor driving events detected";
+    driverWarning.style.color = "#FF9800";
+  } else if (totalEvents <= 6) {
+    driverWarning.textContent = "⚠️⚠️ Moderate driving issues";
+    driverWarning.style.color = "#F44336";
+  } else {
+    driverWarning.textContent = "🚨 CRITICAL: Multiple driving violations!";
+    driverWarning.style.color = "#F44336";
+    driverWarning.style.fontWeight = "bold";
+  }
+}
+
+/* ================= Firebase Listeners ================= */
+
+// Temperature Listener with Warning
+onValue(ref(db, "Sensor/temperature"), snapshot => {
+  const temp = snapshot.val();
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2, '0') + ':' + 
+               now.getMinutes().toString().padStart(2, '0');
+
+  // Handle invalid temperature
+  if (temp === null || temp === -127) {
+    tempValue.textContent = "--°C";
+    tempValue.style.color = "#AAAAAA";
+    tempWarning.textContent = "⚠️ Sensor Disconnected";
+    tempWarning.style.color = "#F44336";
+    return;
+  }
+
+  const numeric = parseFloat(temp);
+  if (isNaN(numeric)) return;
+
+  // Update temperature value
+  tempValue.textContent = numeric.toFixed(1) + "°C";
+  tempValue.classList.add('value-update');
+  setTimeout(() => tempValue.classList.remove('value-update'), 300);
+
+  // Temperature Warnings
+  if (numeric > 35) {
+    tempWarning.textContent = "🔥 CRITICAL: Temperature too high!";
+    tempWarning.style.color = "#F44336";
+    tempValue.style.color = "#F44336";
+    tempChart.data.datasets[0].borderColor = "#F44336";
+    tempChart.data.datasets[0].backgroundColor = "rgba(244, 67, 54, 0.1)";
+    tempChart.data.datasets[0].pointBackgroundColor = "#F44336";
+  } else if (numeric > 28) {
+    tempWarning.textContent = "⚠️ High Temperature Warning";
+    tempWarning.style.color = "#FF9800";
+    tempValue.style.color = "#FF9800";
+    tempChart.data.datasets[0].borderColor = "#FF9800";
+    tempChart.data.datasets[0].backgroundColor = "rgba(255, 152, 0, 0.1)";
+    tempChart.data.datasets[0].pointBackgroundColor = "#FF9800";
+  } else if (numeric < 15) {
+    tempWarning.textContent = "❄️ Low Temperature Warning";
+    tempWarning.style.color = "#2196F3";
+    tempValue.style.color = "#2196F3";
+    tempChart.data.datasets[0].borderColor = "#2196F3";
+    tempChart.data.datasets[0].backgroundColor = "rgba(33, 150, 243, 0.1)";
+    tempChart.data.datasets[0].pointBackgroundColor = "#2196F3";
+  } else {
+    tempWarning.textContent = "✓ Temperature Normal";
+    tempWarning.style.color = "#4CAF50";
+    tempValue.style.color = "#4CAF50";
+    tempChart.data.datasets[0].borderColor = "#4CAF50";
+    tempChart.data.datasets[0].backgroundColor = "rgba(76, 175, 80, 0.1)";
+    tempChart.data.datasets[0].pointBackgroundColor = "#4CAF50";
+  }
+
+  // Update chart
+  tempChart.data.labels.push(time);
+  tempChart.data.datasets[0].data.push(numeric);
+
+  if (tempChart.data.labels.length > 8) {
+    tempChart.data.labels.shift();
+    tempChart.data.datasets[0].data.shift();
+  }
+
+  tempChart.update('none');
+  updateConnectionStatus(true);
+  lastUpdateTime = Date.now();
+});
+
+// Vehicle Tilt Listener
+onValue(ref(db, "vehicle/tilt"), snapshot => {
+  const tilt = snapshot.val();
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2, '0') + ':' + 
+               now.getMinutes().toString().padStart(2, '0');
+
+  if (!tilt) return;
+
+  const mapping = tiltMap[tilt] || tiltMap.flat;
+
+  // Update direction icon
+  direction.textContent = mapping.icon;
+  direction.classList.add('value-update');
+  setTimeout(() => direction.classList.remove('value-update'), 300);
+
+  // Update motion text
+  motionValue.textContent = mapping.text;
+  motionValue.classList.add('value-update');
+  setTimeout(() => motionValue.classList.remove('value-update'), 300);
+
+  // Update motion chart
+  motionChart.data.labels.push(time);
+  motionChart.data.datasets[0].data.push(mapping.value);
+
+  if (motionChart.data.labels.length > 8) {
+    motionChart.data.labels.shift();
+    motionChart.data.datasets[0].data.shift();
+  }
+
+  motionChart.update('none');
+  updateConnectionStatus(true);
+  lastUpdateTime = Date.now();
+});
+
+// Driver Behavior Listeners with Warnings
+onValue(ref(db, "driving/harsh_acceleration"), snapshot => {
+  accelCount = snapshot.val() || 0;
+  driverChart.data.datasets[0].data[0] = accelCount;
+  driverChart.update('none');
+  updateDriverWarning();
+  updateConnectionStatus(true);
+  lastUpdateTime = Date.now();
+});
+
+onValue(ref(db, "driving/harsh_braking"), snapshot => {
+  brakeCount = snapshot.val() || 0;
+  driverChart.data.datasets[0].data[1] = brakeCount;
+  driverChart.update('none');
+  updateDriverWarning();
+  updateConnectionStatus(true);
+  lastUpdateTime = Date.now();
+});
+
+onValue(ref(db, "driving/aggressive_corner"), snapshot => {
+  cornerCount = snapshot.val() || 0;
+  driverChart.data.datasets[0].data[2] = cornerCount;
+  driverChart.update('none');
+  updateDriverWarning();
+  updateConnectionStatus(true);
+  lastUpdateTime = Date.now();
+});
+
+/* ================= Connection Status ================= */
+function updateConnectionStatus(connected) {
+  if (connected) {
+    statusDot.style.background = "#4CAF50";
+    const now = new Date();
+    statusText.textContent = `UPDATED ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  } else {
+    statusDot.style.background = "#F44336";
+    statusText.textContent = "CONNECTION LOST";
+  }
+}
+
+// Monitor connection
+setInterval(() => {
+  const now = Date.now();
+  if (now - lastUpdateTime > 10000) {
+    updateConnectionStatus(false);
+  }
+}, 5000);
+
+// Initial status
+updateConnectionStatus(true);
+</script>
+
+</body>
+</html>
