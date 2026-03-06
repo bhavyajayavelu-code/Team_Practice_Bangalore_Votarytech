@@ -1,2 +1,0 @@
-# Team_Practice_Bangalore_Votarytech
-VT_Bangalore
