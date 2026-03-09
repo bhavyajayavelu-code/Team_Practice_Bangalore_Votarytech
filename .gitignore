@@ -1,8 +1,0 @@
-# Qt user/temp files
-*.pro.user
-*.pro.user.*
-*.user
-*.autosave
-
-# Build folders
-build/
