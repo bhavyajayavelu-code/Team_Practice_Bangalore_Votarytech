@@ -18,6 +18,8 @@ Window {
         property bool tempWarningOn: false
 
 
+        property date currentTime: new Date()
+
 
         // ===== STARTUP SELF TEST =====
         property bool startupSelfTest: true
@@ -76,6 +78,10 @@ Window {
         // ===== OMS STATUS =====
         property string seatStatus: ""
         property string airbagStatus: ""
+
+
+        property bool airbagBlink: false
+        property bool airbagBlinkVisible: true
 
 
        property string firebaseAlertMessage: ""
@@ -143,16 +149,6 @@ Window {
         height: 60
         color: "transparent"
 
-
-//        // Engine icon (replacing ABS)
-//        Image {
-//            source: "qrc:/assets/icons/engine.png"
-//            width: 36
-//            height: 36
-//            anchors.right: parent.right
-//            anchors.rightMargin: 20
-//            anchors.verticalCenter: parent.verticalCenter
-//        }
         // =========================
         // Time & Date (Center of Top Bar)
         // =========================
@@ -166,7 +162,7 @@ Window {
         Text {
             id: timeText
             // 12-hour format with AM/PM
-            text: Qt.formatTime(new Date(), "hh:mm AP")
+            text: Qt.formatTime(currentTime, "hh:mm AP")
             color: "white"
             font.pixelSize: 38
             font.bold: true
@@ -174,7 +170,8 @@ Window {
 
         Text {
             id: dateText
-            text: Qt.formatDate(new Date(), "dd MMM yyyy")
+            //text: Qt.formatDate(new Date(), "dd MMM yyyy")
+            text: Qt.formatDate(currentTime, "dd MMM yyyy")
             color: "#AAAAAA"
             font.pixelSize: 20
             anchors.left: parent.left
@@ -250,6 +247,7 @@ Window {
 
             // CENTER – LIVE CAMERA VIEW
             Rectangle {
+                id: cameraBox
                 width: 320
                 height: 200
                 radius: 14
@@ -373,14 +371,14 @@ Window {
         spacing: 40
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 90
+        anchors.bottomMargin: 130
         z: 20
 
 
         Image {
             source: "qrc:/assets/icons/seat-belt.svg"
-            width: 36
-            height: 36
+            width: 50
+            height: 50
             visible: seatBeltOn
 
             opacity: startupSelfTest
@@ -392,8 +390,8 @@ Window {
 
         Image {
             source: "qrc:/assets/icons/battery4.svg"
-            width: 36
-            height: 36
+            width: 50
+            height: 50
             visible: batteryWarning
             opacity: startupSelfTest
                          ? (startupBlinkState ? 1 : 0.2)
@@ -402,8 +400,8 @@ Window {
 
         Image {
             source: "qrc:/assets/icons/drive-brake.svg"
-            width: 36
-            height: 36
+            width: 50
+            height: 50
             visible: parkingBrakeOn
             opacity: startupSelfTest
                         ? (startupBlinkState ? 1 : 0.2)
@@ -412,22 +410,21 @@ Window {
         }
 
         Image {
+            id: airbagIcon
             source: "qrc:/assets/icons/airbag.svg"
-            width: 36
-            height: 36
+            width: 50
+            height: 50
             visible: airbagWarning
+
             opacity: startupSelfTest
                      ? (startupBlinkState ? 1 : 0.2)
-                     : 1
-            //color: "#FFAA00"
-
-            // -------- Temperature Warning --------
+                     : (airbagBlink ? (airbagBlinkVisible ? 1 : 0.2) : 1)
         }
         Image {
             id: tempWarningIcon
             source: "qrc:/assets/icons/thermometer.svg"
-            width: 36
-            height: 36
+            width: 50
+            height: 50
             visible: true
            // opacity: 1  // Start in stable state
             opacity: startupSelfTest
@@ -441,14 +438,16 @@ Window {
     // =========================
     Text {
         id: batteryTempText
-        text: "Battery Temp: " + firebaseTemperature.toFixed(1) + "°C"
-        color: firebaseTemperature >= 28 ? "red" : "white"
-        font.pixelSize: 18
+            text: batterySensorFault
+                  ? "Battery Temp: --"
+                  : "Battery Temp: " + firebaseTemperature.toFixed(1) + "°C"
+            color: firebaseTemperature >= 28 ? "red" : "white"
+        font.pixelSize: 26
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: warningIcons.bottom
-        anchors.topMargin: 12
+        anchors.topMargin: 25
     }
 
 
@@ -459,7 +458,7 @@ Window {
         id: firebaseAlertText
         text: firebaseAlertMessage
         color: "red"
-        font.pixelSize: 18
+        font.pixelSize: 26
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -475,16 +474,23 @@ Window {
     // =========================
     Text {
         id: dtcText
+
+
+       // x: parent.width * 0.25   // move left
+         // y: parent.height - 40
+
+
         text: dtcDescription
         color: "red"
-        font.pixelSize: 16
+        font.pixelSize: 26
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.horizontalCenterOffset: -100   // moves text left
         anchors.top: firebaseAlertText.visible
                      ? firebaseAlertText.bottom
                      : batteryTempText.bottom
-        anchors.topMargin: 8
+        anchors.topMargin: 7
 
         visible: dtcActive
     }
@@ -501,13 +507,13 @@ Window {
               yawnMsg ? yawnText : ""
 
         color: "red"
-        font.pixelSize: 20
+        font.pixelSize: 24
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.horizontalCenterOffset: 380
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60
+        anchors.bottomMargin: 40
 
         visible: drowsyMsg || yawnMsg
     }
@@ -515,19 +521,21 @@ Window {
 
     // =========================
     // OMS DISPLAY TEXT
-    // =========================
     Text {
         id: omsStatusText
-        text: seatStatus + "   |   Airbag: " + airbagStatus
+
+        text: seatStatus.toUpperCase() === "ADULT"
+              ? "ADULT"
+              : seatStatus + " | Airbag: " + airbagStatus
 
         color: airbagStatus === "ACTIVATED" ? "#00FF00" : "red"
-        font.pixelSize: 18
+        font.pixelSize: 20
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenterOffset: 320
+        anchors.horizontalCenterOffset: 340
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60
+        anchors.bottomMargin: 40
 
         visible: seatStatus !== ""
     }
@@ -540,7 +548,7 @@ Window {
         id: ultrasonicAlertText
         text: ultrasonicAlert
         color: "red"
-        font.pixelSize: 18
+        font.pixelSize: 26
         font.bold: true
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -724,14 +732,45 @@ Window {
 
                             if (data.OMS.status.online === true) {
 
+                                // Show status only when online
                                 seatStatus   = data.OMS.status.seat_status || ""
                                 airbagStatus = data.OMS.status.airbag || ""
 
+                                // Blink when DEACTIVATED
+                                if (airbagStatus && airbagStatus.toUpperCase() === "DEACTIVATED") {
+
+                                    airbagBlink = true
+
+                                    if (!airbagBlinkTimer.running)
+                                        airbagBlinkTimer.start()
+
+                                } else {
+
+                                    airbagBlink = false
+                                    airbagBlinkTimer.stop()
+                                    airbagBlinkVisible = true
+                                }
+
                             } else {
 
+                                // When OMS is offline → hide everything
                                 seatStatus   = ""
                                 airbagStatus = ""
+
+                                airbagBlink = false
+                                airbagBlinkTimer.stop()
+                                airbagBlinkVisible = true
                             }
+
+                        } else {
+
+                            // If OMS block missing
+                            seatStatus   = ""
+                            airbagStatus = ""
+
+                            airbagBlink = false
+                            airbagBlinkTimer.stop()
+                            airbagBlinkVisible = true
                         }
                         // ===== DTC FROM FIREBASE (SHOW ONLY DESCRIPTION) =====
                         dtcActive = false
@@ -760,32 +799,30 @@ Window {
                         }
 
                         if (data.Sensor && data.Sensor.temperature !== undefined) {
-                            firebaseTemperature = parseFloat(data.Sensor.temperature)
 
-                            // -------- Battery sensor fault (-127) --------
-                            if (firebaseTemperature === -127) {
+                            var tempValue = data.Sensor.temperature
+
+                            // SENSOR FAULT
+                            if (tempValue === "--") {
+
                                 batterySensorFault = true
-                                batteryAlertMessage = "Alert - Battery temperature sensor fault"
+                                dtcActive = true
+                                dtcDescription = "Battery Temperature Sensor Fault"
+
                                 batteryBlink = true
                                 if (!batteryBlinkTimer.running)
                                     batteryBlinkTimer.start()
+
+                                firebaseTemperature = 0
                                 return
                             }
 
-                            // Check if temperature is above 28°C
-                            if (firebaseTemperature > 28) {
+                            // NORMAL TEMPERATURE
+                            firebaseTemperature = parseFloat(tempValue)
 
-                                tempBlinking = true
-                                if (!blinkTimer.running)
-                                    blinkTimer.start()
-
-                            } else {
-
-                                tempBlinking = false
-                                blinkTimer.stop()
-                                tempWarningIcon.opacity = 1
-                            }
-
+                            batterySensorFault = false
+                            batteryBlink = false
+                            batteryBlinkTimer.stop()
                         }
                     } catch (e) {
                         console.log("Firebase parse error")
@@ -891,8 +928,27 @@ Window {
             startupBlinkState = true
         }
     }
+    Timer {
+        id: airbagBlinkTimer
+        interval: 500
+        repeat: true
+        running: airbagBlink
 
+        onTriggered: {
+            airbagBlinkVisible = !airbagBlinkVisible
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            currentTime = new Date()
+        }
+    }
 
  }
+
 
 }
