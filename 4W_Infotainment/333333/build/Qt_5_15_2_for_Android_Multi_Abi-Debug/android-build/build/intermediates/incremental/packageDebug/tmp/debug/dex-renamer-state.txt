@@ -1,7 +1,0 @@
-#Thu Mar 05 16:26:43 IST 2026
-base.0=/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
-path.1=classes.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
