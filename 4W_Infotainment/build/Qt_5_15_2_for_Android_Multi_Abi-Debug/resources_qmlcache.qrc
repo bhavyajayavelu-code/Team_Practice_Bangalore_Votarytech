@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">../../main.qml</file>
+        <file alias="icons/browser.svg">../../icons/browser.svg</file>
+        <file alias="icons/navigation.svg">../../icons/navigation.svg</file>
+        <file alias="icons/wifi.svg">../../icons/wifi.svg</file>
+        <file alias="icons/bluetooth.svg">../../icons/bluetooth.svg</file>
+        <file alias="icons/settings.svg">../../icons/settings.svg</file>
+        <file alias="icons/maps.svg">../../icons/maps.svg</file>
+        <file alias="icons/video.svg">../../icons/video.svg</file>
+        <file alias="icons/radio.svg">../../icons/radio.svg</file>
+        <file alias="icons/playstore.svg">../../icons/playstore.svg</file>
+        <file alias="icons/phonelink.svg">../../icons/phonelink.svg</file>
+        <file alias="icons/download.svg">../../icons/download.svg</file>
+        <file alias="icons/filemanager.svg">../../icons/filemanager.svg</file>
+        <file alias="icons/votary.png">../../icons/votary.png</file>
+        <file alias="audio/retro.mp3">../../audio/retro.mp3</file>
+    </qresource>
+</RCC>

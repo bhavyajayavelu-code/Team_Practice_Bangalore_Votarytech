@@ -1,0 +1,302 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="org.qtproject.example"
+4    android:installLocation="auto"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="21"
+9-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml
+10        android:targetSdkVersion="36" />
+10-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml
+11
+12    <!-- Qt auto-injected permissions -->
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:10:5-67
+13-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:10:22-64
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:11:5-81
+14-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:11:22-78
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:12:5-79
+15-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:12:22-76
+16    <uses-permission android:name="android.permission.CAMERA" />
+16-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:13:5-65
+16-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:13:22-62
+17    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+17-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:14:5-71
+17-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:14:22-68
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:15:5-79
+18-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:15:22-76
+19
+20    <!-- Qt auto-injected features -->
+21    <uses-feature
+21-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:18:5-85
+22        android:name="android.hardware.camera"
+22-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:18:19-57
+23        android:required="false" />
+23-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:18:58-82
+24    <uses-feature
+24-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:19:5-95
+25        android:name="android.hardware.camera.autofocus"
+25-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:19:19-67
+26        android:required="false" />
+26-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:19:68-92
+27    <uses-feature
+27-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:20:5-89
+28        android:name="android.hardware.microphone"
+28-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:20:19-61
+29        android:required="false" />
+29-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:20:62-86
+30    <uses-feature
+30-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:21:5-91
+31        android:name="android.hardware.location.gps"
+31-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:21:19-63
+32        android:required="false" />
+32-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:21:64-88
+33
+34    <!-- PERMISSIONS FOR CALL - MUST BE HERE -->
+35    <uses-permission android:name="android.permission.CALL_PHONE" />
+35-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:24:5-68
+35-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:24:22-66
+36    <uses-permission android:name="android.permission.READ_CONTACTS" />
+36-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:25:5-71
+36-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:25:22-69
+37
+38    <!-- ADD THIS PERMISSION FOR WINDOW OVERLAY -->
+39    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+39-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:28:5-77
+39-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:28:22-75
+40
+41    <supports-screens
+41-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:30:5-34:37
+42        android:anyDensity="true"
+42-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:34:9-34
+43        android:largeScreens="true"
+43-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:33:9-36
+44        android:normalScreens="true"
+44-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:32:9-37
+45        android:smallScreens="true" />
+45-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:31:9-36
+46
+47    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+47-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:36:5-80
+47-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:36:22-78
+48    <uses-permission android:name="android.permission.WAKE_LOCK" />
+48-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:38:5-67
+48-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:38:22-65
+49    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+49-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:39:5-79
+49-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:39:22-77
+50
+51    <!--
+52         WiFi Permissions
+53        removed : android:persistent="true"
+54        later add at line 47
+55    -->
+56    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+56-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:44:5-76
+56-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:44:22-73
+57    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+57-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:45:5-76
+57-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:45:22-73
+58    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+58-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:12:5-79
+58-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:12:22-76
+59    <uses-permission android:name="android.permission.INTERNET" />
+59-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:10:5-67
+59-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:10:22-64
+60    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+60-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:48:5-85
+60-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:48:22-83
+61
+62    <application
+62-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:51:5-162:19
+63        android:name="org.qtproject.qt5.android.bindings.QtApplication"
+63-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:52:9-72
+64        android:allowBackup="false"
+64-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:56:9-36
+65        android:debuggable="true"
+66        android:extractNativeLibs="true"
+66-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:55:9-41
+67        android:hardwareAccelerated="true"
+67-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:54:9-43
+68        android:label="CarInfotainment"
+68-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:53:9-40
+69        android:supportsRtl="false" >
+69-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:58:9-36
+70        <activity
+70-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:60:9-150:20
+71            android:name="org.qtproject.qt5.android.bindings.QtActivity"
+71-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:61:13-73
+72            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+72-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:67:13-182
+73            android:exported="true"
+73-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:65:13-36
+74            android:label="CarInfotainment"
+74-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:62:13-44
+75            android:launchMode="singleTask"
+75-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:63:13-44
+76            android:screenOrientation="landscape"
+76-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:64:13-50
+77            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+77-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:66:13-71
+78
+79            <!-- MAIN + HOME + DEFAULT -->
+80            <intent-filter>
+80-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:70:13-75:29
+81                <action android:name="android.intent.action.MAIN" />
+81-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:71:17-69
+81-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:71:25-66
+82
+83                <category android:name="android.intent.category.HOME" />
+83-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:72:17-73
+83-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:72:27-70
+84                <category android:name="android.intent.category.DEFAULT" />
+84-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:73:17-76
+84-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:73:27-73
+85                <category android:name="android.intent.category.LAUNCHER" />
+85-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:74:17-77
+85-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:74:27-74
+86            </intent-filter>
+87
+88            <!-- Qt library entry -->
+89            <meta-data
+89-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:78:13-80:51
+90                android:name="android.app.lib_name"
+90-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:79:17-52
+91                android:value="CarInfotainment" />
+91-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:80:17-48
+92            <meta-data
+92-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:82:13-84:56
+93                android:name="android.app.qt_sources_resource_id"
+93-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:83:17-66
+94                android:resource="@array/qt_sources" />
+94-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:84:17-53
+95            <meta-data
+95-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:86:13-88:43
+96                android:name="android.app.repository"
+96-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:87:17-54
+97                android:value="default" />
+97-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:88:17-40
+98            <meta-data
+98-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:90:13-92:53
+99                android:name="android.app.qt_libs_resource_id"
+99-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:91:17-63
+100                android:resource="@array/qt_libs" />
+100-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:92:17-50
+101            <meta-data
+101-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:94:13-96:58
+102                android:name="android.app.bundled_libs_resource_id"
+102-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:95:17-68
+103                android:resource="@array/bundled_libs" />
+103-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:96:17-55
+104            <meta-data
+104-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:98:13-100:37
+105                android:name="android.app.bundle_local_qt_libs"
+105-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:99:17-64
+106                android:value="1" />
+106-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:100:17-34
+107            <meta-data
+107-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:102:13-104:37
+108                android:name="android.app.use_local_qt_libs"
+108-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:103:17-61
+109                android:value="1" />
+109-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:104:17-34
+110            <meta-data
+110-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:106:13-108:55
+111                android:name="android.app.libs_prefix"
+111-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:107:17-55
+112                android:value="/data/local/tmp/qt/" />
+112-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:108:17-52
+113            <meta-data
+113-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:110:13-112:61
+114                android:name="android.app.load_local_libs_resource_id"
+114-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:111:17-71
+115                android:resource="@array/load_local_libs" />
+115-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:112:17-58
+116            <meta-data
+116-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:114:13-116:169
+117                android:name="android.app.load_local_jars"
+117-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:115:17-59
+118                android:value="jar/QtAndroid.jar:jar/QtAndroidBearer.jar:jar/QtAndroidExtras.jar:jar/QtMultimedia.jar:jar/QtPositioning.jar:jar/QtAndroidWebView.jar" />
+118-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:116:17-166
+119            <meta-data
+119-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:118:13-120:142
+120                android:name="android.app.static_init_classes"
+120-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:119:17-63
+121                android:value="org.qtproject.qt5.android.multimedia.QtMultimediaUtils:org.qtproject.qt5.android.positioning.QtPositioning" />
+121-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:120:17-139
+122
+123            <!-- Qt error & info messages -->
+124            <meta-data
+124-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:123:13-124:73
+125                android:name="android.app.ministro_not_found_msg"
+125-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:123:24-73
+126                android:value="@string/ministro_not_found_msg" />
+126-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:124:24-70
+127            <meta-data
+127-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:126:13-127:70
+128                android:name="android.app.ministro_needed_msg"
+128-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:126:24-70
+129                android:value="@string/ministro_needed_msg" />
+129-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:127:24-67
+130            <meta-data
+130-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:129:13-130:66
+131                android:name="android.app.fatal_error_msg"
+131-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:129:24-66
+132                android:value="@string/fatal_error_msg" />
+132-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:130:24-63
+133            <meta-data
+133-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:132:13-133:78
+134                android:name="android.app.unsupported_android_version"
+134-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:132:24-78
+135                android:value="@string/unsupported_android_version" />
+135-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:133:24-75
+136
+137            <!-- Background behavior -->
+138            <meta-data
+138-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:136:13-138:41
+139                android:name="android.app.background_running"
+139-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:137:17-62
+140                android:value="false" />
+140-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:138:17-38
+141
+142            <!-- DPI scaling -->
+143            <meta-data
+143-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:141:13-143:41
+144                android:name="android.app.auto_screen_scale_factor"
+144-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:142:17-68
+145                android:value="false" />
+145-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:143:17-38
+146
+147            <!-- Android style extraction -->
+148            <meta-data
+148-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:146:13-148:43
+149                android:name="android.app.extract_android_style"
+149-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:147:17-65
+150                android:value="default" />
+150-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:148:17-40
+151        </activity>
+152
+153        <!-- Services can be added here if required -->
+154        <receiver
+154-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:153:9-160:20
+155            android:name="org.qtproject.example.BootReceiver"
+155-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:154:13-62
+156            android:enabled="true"
+156-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:155:13-35
+157            android:exported="true" >
+157-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:156:13-36
+158            <intent-filter>
+158-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:157:13-159:29
+159                <action android:name="android.intent.action.BOOT_COMPLETED" />
+159-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:158:17-78
+159-->/home/votarytech/Desktop/qt qml/updtd_ivi_24feb/updtd_ivi_13_02/333333/build/Qt_5_15_2_for_Android_Multi_Abi-Debug/android-build/AndroidManifest.xml:158:25-76
+160            </intent-filter>
+161        </receiver>
+162    </application>
+163
+164</manifest>
