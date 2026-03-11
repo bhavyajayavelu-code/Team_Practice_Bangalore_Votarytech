@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>BluetoothPage.qml</file>
+        <file>WifiPage.qml</file>
+        <file>LockSreen.qml</file>
+    </qresource>
+</RCC>
